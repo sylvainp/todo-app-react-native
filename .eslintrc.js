@@ -1,8 +1,16 @@
 module.exports = {
   root: true,
-  extends: ['@react-native-community', 'prettier'],
+  env: {
+    "jest/globals": true
+  },
+  extends: [
+    '@react-native-community',
+    'prettier',
+    'plugin:jest/recommended',
+    'airbnb,',
+  ],
   parser: '@typescript-eslint/parser',
-  plugins: ['@typescript-eslint', 'prettier'],
+  plugins: ['@typescript-eslint', 'prettier', 'jest'],
   overrides: [
     {
       files: ['*.ts', '*.tsx'],
@@ -11,6 +19,7 @@ module.exports = {
         '@typescript-eslint/no-shadow': ['error'],
         'no-shadow': 'off',
         'no-undef': 'off',
+        "jest/prefer-expect-assertions": ['error']
       },
     },
   ],
