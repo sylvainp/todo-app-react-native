@@ -1,4 +1,4 @@
-import UsecaseRequest from '../../core/usecase.request';
+import UsecaseRequest from '../../../core/usecase/usecase.request';
 
 export default interface CreateTodoRequest extends UsecaseRequest {
   title: string;

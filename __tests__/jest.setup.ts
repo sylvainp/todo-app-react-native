@@ -1,18 +1,18 @@
 import 'reflect-metadata';
 
 import {container, Lifecycle} from 'tsyringe';
-import LocalDatasource from '../src/data/datasources/local.datasource';
-import {TodoRepositoryInjectorName} from '../src/domain/repositories/todo.repository';
-import TodoRepositoryMock from './mock/classes/todo.repository.mock';
+import InMemoryAdapter from '../src/data/adapters/in_memory.adapter';
+import {TodoPortInjectorName} from '../src/domain/ports/todo.port';
+import TodoPortMock from './mock/classes/todo.port.mock';
 
 container.register(
-  TodoRepositoryInjectorName,
-  {useClass: TodoRepositoryMock},
+  TodoPortInjectorName,
+  {useClass: TodoPortMock},
   {lifecycle: Lifecycle.Singleton},
 );
 
 container.register(
-  LocalDatasource.injectorName,
-  {useClass: LocalDatasource},
+  InMemoryAdapter.injectorName,
+  {useClass: InMemoryAdapter},
   {lifecycle: Lifecycle.Singleton},
 );

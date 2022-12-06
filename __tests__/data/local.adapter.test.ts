@@ -1,10 +1,10 @@
-import LocalDatasource from '../../src/data/datasources/local.datasource';
-import LocalDatasourceMock from '../mock/classes/local.datasource.mock';
+import InMemoryAdapter from '../../src/data/adapters/in_memory.adapter';
+import LocalAdapterMock from '../mock/classes/local.adapter.mock';
 
 describe('LocalDatasource', () => {
-  let localDatasource: LocalDatasourceMock;
+  let localDatasource: LocalAdapterMock;
   beforeAll(() => {
-    localDatasource = new LocalDatasourceMock();
+    localDatasource = new LocalAdapterMock();
   });
 
   it('addTodo must add a TodoModel into datas', async () => {

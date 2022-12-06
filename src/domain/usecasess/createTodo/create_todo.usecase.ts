@@ -1,11 +1,8 @@
-import {EventSubscriptionVendor} from 'react-native';
 import {autoInjectable, inject} from 'tsyringe';
-import Usecase from '../../../core/usecase';
-import UsecaseResponse from '../../../core/usecase.response';
+import Usecase from '../../../core/usecase/usecase';
+import UsecaseResponse from '../../../core/usecase/usecase.response';
 import TodoEntity from '../../entities/todo.entities';
-import TodoRepository, {
-  TodoRepositoryInjectorName,
-} from '../../repositories/todo.repository';
+import TodoPort, {TodoPortInjectorName} from '../../ports/todo.port';
 import CreateTodoRequest from './create_todo.usecaserequest';
 
 @autoInjectable()
@@ -13,9 +10,7 @@ export default class CreateTodoUsecase extends Usecase<
   CreateTodoRequest,
   TodoEntity
 > {
-  constructor(
-    @inject(TodoRepositoryInjectorName) private repository: TodoRepository,
-  ) {
+  constructor(@inject(TodoPortInjectorName) private repository: TodoPort) {
     super();
   }
   async call(request: CreateTodoRequest): Promise<UsecaseResponse<TodoEntity>> {
