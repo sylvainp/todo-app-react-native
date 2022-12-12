@@ -1,4 +1,3 @@
-import InMemoryAdapter from '../../src/data/adapters/in_memory.adapter';
 import LocalAdapterMock from '../mock/classes/local.adapter.mock';
 
 describe('LocalDatasource', () => {

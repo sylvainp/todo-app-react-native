@@ -1,17 +1,12 @@
-import {autoInjectable, inject} from 'tsyringe';
 import TodoEntity from '../../domain/entities/todo.entities';
 import TodoPort from '../../domain/ports/todo.port';
 import InMemoryAdapter from '../adapters/in_memory.adapter';
 import CreateTodoRequest from '../../domain/usecasess/createTodo/create_todo.usecaserequest';
 import MarkTodoDoneRequest from '../../domain/usecasess/markTodoDone/mark_todo_done.usecaserequest';
 
-@autoInjectable()
 export default class TodoPortImpl implements TodoPort {
   // private _store;
-  constructor(
-    @inject(InMemoryAdapter.injectorName)
-    private localDatasource: InMemoryAdapter,
-  ) {}
+  constructor(private localDatasource: InMemoryAdapter) {}
   async getAllTodo(): Promise<Error | TodoEntity[]> {
     try {
       const response = await this.localDatasource.getAllTodos();
