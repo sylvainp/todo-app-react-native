@@ -1,13 +1,12 @@
-import {container, Lifecycle} from 'tsyringe';
 import InMemoryAdapter from '../../src/data/adapters/in_memory.adapter';
 import TodoInMemoryModel from '../../src/data/models/todo.inmemory.model';
-import TodoPortImpl from '../../src/data/ports/todo.port.impl';
 import TodoEntity from '../../src/domain/entities/todo.entities';
-import {TodoPortInjectorName} from '../../src/domain/ports/todo.port';
+import TodoPort from '../../src/domain/ports/todo.port';
 import CreateTodoRequest from '../../src/domain/usecasess/createTodo/create_todo.usecaserequest';
+import useConfigMock from '../mock/classes/MockConfigurationContext';
 
 describe('TodoPortImpl', () => {
-  let todoPortImpl: TodoPortImpl;
+  let todoPortImpl: TodoPort;
   let localAdapter: InMemoryAdapter;
   const mockCreateTodoRequest: CreateTodoRequest = {
     title: 'title',
@@ -15,14 +14,9 @@ describe('TodoPortImpl', () => {
   };
 
   beforeAll(() => {
-    container.register(
-      TodoPortInjectorName,
-      {useClass: TodoPortImpl},
-      {lifecycle: Lifecycle.Singleton},
-    );
-
-    localAdapter = container.resolve(InMemoryAdapter.injectorName);
-    todoPortImpl = container.resolve(TodoPortInjectorName);
+    const {inMemoryAdapter, todoPort} = useConfigMock();
+    localAdapter = inMemoryAdapter;
+    todoPortImpl = todoPort;
   });
 
   it('port must be resolved by DI', () => {

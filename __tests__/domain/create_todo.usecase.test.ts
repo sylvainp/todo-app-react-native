@@ -1,9 +1,9 @@
-import {container} from 'tsyringe';
 import UsecaseResponse from '../../src/core/usecase/usecase.response';
 import TodoEntity from '../../src/domain/entities/todo.entities';
-import TodoPort, {TodoPortInjectorName} from '../../src/domain/ports/todo.port';
+import TodoPort from '../../src/domain/ports/todo.port';
 import CreateTodoUsecase from '../../src/domain/usecasess/createTodo/create_todo.usecase';
 import CreateTodoRequest from '../../src/domain/usecasess/createTodo/create_todo.usecaserequest';
+import useConfigMock from '../mock/classes/MockConfigurationContext';
 
 describe('CreateTodoUsecase', () => {
   let usecase: CreateTodoUsecase;
@@ -13,8 +13,9 @@ describe('CreateTodoUsecase', () => {
     description: 'description',
   };
   beforeAll(() => {
-    todoRepository = container.resolve(TodoPortInjectorName);
-    usecase = container.resolve(CreateTodoUsecase);
+    const {todoPort, createTodoUsecase} = useConfigMock();
+    todoRepository = todoPort;
+    usecase = createTodoUsecase;
   });
 
   it('usecase must be resolve by DI', async () => {

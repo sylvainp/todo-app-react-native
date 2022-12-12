@@ -1,5 +1,5 @@
 import {useEffect, useState} from 'react';
-import {container} from 'tsyringe';
+import {useConfig} from '../../core/context/ConfigurationContext';
 import UsecaseResponse from '../../core/usecase/usecase.response';
 import TodoEntity from '../entities/todo.entities';
 import CreateTodoUsecase from './createTodo/create_todo.usecase';
@@ -9,15 +9,16 @@ import MarkTodoDoneUsecase from './markTodoDone/mark_todo_done.usecase';
 const useTodo = () => {
   const [isLoading, setLoading] = useState<boolean>(false);
   const [todos, setTodos] = useState<TodoEntity[]>([]);
+  const {listAllTodoUsecase, createTodoUsecase, markTodoDoneUsecase} =
+    useConfig();
 
   const getAllTodos = async () => {
     if (!isLoading) {
       setLoading(true);
     }
-    const getAllTodoUsecase: ListAllTodoUsecase =
-      container.resolve(ListAllTodoUsecase);
+
     const response: UsecaseResponse<TodoEntity[]> =
-      await getAllTodoUsecase.call();
+      await listAllTodoUsecase.call();
     if (response.data) {
       setTodos(response.data);
     } else {
@@ -32,9 +33,7 @@ const useTodo = () => {
 
   const addTodo = async (title: string, description: string | null) => {
     setLoading(true);
-    const addTodoUsecase: CreateTodoUsecase =
-      container.resolve(CreateTodoUsecase);
-    const response: UsecaseResponse<TodoEntity> = await addTodoUsecase.call({
+    const response: UsecaseResponse<TodoEntity> = await createTodoUsecase.call({
       title,
       description,
     });
@@ -48,8 +47,6 @@ const useTodo = () => {
 
   const markTodoDone = async (todoId: string, done: boolean) => {
     setLoading(true);
-    const markTodoDoneUsecase: MarkTodoDoneUsecase =
-      container.resolve(MarkTodoDoneUsecase);
     const response: UsecaseResponse<TodoEntity> =
       await markTodoDoneUsecase.call({
         id: todoId,

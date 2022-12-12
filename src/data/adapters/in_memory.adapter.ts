@@ -1,8 +1,6 @@
-import {autoInjectable} from 'tsyringe';
 import MarkTodoDoneRequest from '../../domain/usecasess/markTodoDone/mark_todo_done.usecaserequest';
 import TodoInMemoryModel from '../models/todo.inmemory.model';
 
-@autoInjectable()
 export default class InMemoryAdapter {
   static readonly injectorName: 'InMemoryAdapter';
 
