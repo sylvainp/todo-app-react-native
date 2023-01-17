@@ -7,14 +7,14 @@ import useConfigMock from '../mock/classes/MockConfigurationContext';
 
 describe('CreateTodoUsecase', () => {
   let usecase: CreateTodoUsecase;
-  let todoRepository: TodoPort;
+  let todoAdapter: TodoPort;
   const mockCreateTodoRequest: CreateTodoRequest = {
     title: 'title',
     description: 'description',
   };
   beforeAll(() => {
-    const {todoPort, createTodoUsecase} = useConfigMock();
-    todoRepository = todoPort;
+    const {inMemoryAdapter, createTodoUsecase} = useConfigMock();
+    todoAdapter = inMemoryAdapter;
     usecase = createTodoUsecase;
   });
 
@@ -25,10 +25,10 @@ describe('CreateTodoUsecase', () => {
 
   it('call function must call addTodo todoPort function with params', async () => {
     expect.assertions(2);
-    jest.spyOn(todoRepository, 'addTodo').mockImplementation();
+    jest.spyOn(todoAdapter, 'addTodo').mockImplementation();
     await usecase.call(mockCreateTodoRequest);
-    expect(todoRepository.addTodo).toHaveBeenCalledTimes(1);
-    expect(todoRepository.addTodo).toHaveBeenCalledWith(mockCreateTodoRequest);
+    expect(todoAdapter.addTodo).toHaveBeenCalledTimes(1);
+    expect(todoAdapter.addTodo).toHaveBeenCalledWith(mockCreateTodoRequest);
   });
 
   it('call function must return a usecaseResponse with todoEntity returned by port', async () => {
@@ -38,7 +38,7 @@ describe('CreateTodoUsecase', () => {
       mockCreateTodoRequest.title,
       mockCreateTodoRequest.description,
     );
-    jest.spyOn(todoRepository, 'addTodo').mockResolvedValue(expectedTodoEntity);
+    jest.spyOn(todoAdapter, 'addTodo').mockResolvedValue(expectedTodoEntity);
     const response: UsecaseResponse<TodoEntity> = await usecase.call(
       mockCreateTodoRequest,
     );
@@ -49,7 +49,7 @@ describe('CreateTodoUsecase', () => {
   it('call function must return a usecaseResponse with error returned by port', async () => {
     expect.assertions(2);
     const expectedError = new Error('my error');
-    jest.spyOn(todoRepository, 'addTodo').mockResolvedValue(expectedError);
+    jest.spyOn(todoAdapter, 'addTodo').mockResolvedValue(expectedError);
     const result: UsecaseResponse<TodoEntity> = await usecase.call(
       mockCreateTodoRequest,
     );

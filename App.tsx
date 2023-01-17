@@ -10,12 +10,10 @@
 
 import React from 'react';
 import {SafeAreaView, StatusBar} from 'react-native';
+import MainScreen from './src/adapters/primaries/screens/MainScreen';
 import {ConfigContext} from './src/core/context/ConfigurationContext';
 import getConfigurationContextValue from './src/core/context/getConfigurationContextValue';
-import InMemoryAdapter from './src/data/adapters/in_memory.adapter';
-import TodoPortImpl from './src/data/ports/todo.port.impl';
-import {TodoPortInjectorName} from './src/domain/ports/todo.port';
-import MainScreen from './src/presentation/MainScreen';
+
 const App = () => {
   return (
     <ConfigContext.Provider value={getConfigurationContextValue()}>

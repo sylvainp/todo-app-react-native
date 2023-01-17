@@ -1,10 +1,7 @@
 import {useEffect, useState} from 'react';
-import {useConfig} from '../../core/context/ConfigurationContext';
-import UsecaseResponse from '../../core/usecase/usecase.response';
-import TodoEntity from '../entities/todo.entities';
-import CreateTodoUsecase from './createTodo/create_todo.usecase';
-import ListAllTodoUsecase from './listAllTodo/list_all_todo.usecase';
-import MarkTodoDoneUsecase from './markTodoDone/mark_todo_done.usecase';
+import {useConfig} from '../../../core/context/ConfigurationContext';
+import UsecaseResponse from '../../../core/usecase/usecase.response';
+import TodoEntity from '../../../domain/entities/todo.entities';
 
 const useTodo = () => {
   const [isLoading, setLoading] = useState<boolean>(false);
