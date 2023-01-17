@@ -6,7 +6,7 @@ import {
   StyleSheet,
   View,
 } from 'react-native';
-import useTodo from '../domain/usecasess/useTodo.hook';
+import useTodo from '../hooks/useTodo.hook';
 import CreateTodo from './CreateTodo';
 import TodoList from './TodoList';
 const styles = StyleSheet.create({

@@ -2,7 +2,7 @@ import CheckBox from '@react-native-community/checkbox';
 import React, {useState} from 'react';
 import {useEffect} from 'react';
 import {StyleSheet, Text, TouchableOpacity, View} from 'react-native';
-import TodoEntity from '../domain/entities/todo.entities';
+import TodoEntity from '../../../domain/entities/todo.entities';
 
 const styles = StyleSheet.create({
   row: {
@@ -48,6 +48,7 @@ const TodoItem = (prop: TodoItemProp) => {
   const [checked, setChecked] = useState(item.isDone);
 
   useEffect(() => {
+    console.log('TodoItem.useEffect', item.id, item.isDone, checked);
     onChecked(item.id, checked);
   }, [checked]);
   return (

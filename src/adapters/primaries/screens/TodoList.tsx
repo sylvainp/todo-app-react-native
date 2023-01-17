@@ -1,6 +1,6 @@
 import React from 'react';
 import {FlatList, StyleSheet} from 'react-native';
-import TodoEntity from '../domain/entities/todo.entities';
+import TodoEntity from '../../../domain/entities/todo.entities';
 import TodoItem from './TodoItem';
 
 const styles = StyleSheet.create({
