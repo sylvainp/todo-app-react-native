@@ -8,21 +8,36 @@
  * @format
  */
 
-import React from 'react';
-import {SafeAreaView, StatusBar} from 'react-native';
-import MainScreen from './src/adapters/primaries/screens/MainScreen';
+import {StoreProvider} from 'easy-peasy';
+import React, {useEffect} from 'react';
+import {SafeAreaView, StatusBar, Text, View} from 'react-native';
+import {store, useStoreState} from './src/core/store/store';
 import {ConfigContext} from './src/core/context/ConfigurationContext';
 import getConfigurationContextValue from './src/core/context/getConfigurationContextValue';
+import MainScreen from './src/presentation/screens/todos/MainScreen';
+import AuthScreen from './src/presentation/screens/auth/AuthScreen';
 
+const onlineScreens = <MainScreen />;
+const offlineScreens = <AuthScreen />;
 const App = () => {
+  const userJWT = useStoreState(state => state.userJWT);
+
   return (
-    <ConfigContext.Provider value={getConfigurationContextValue()}>
+    <ConfigContext.Provider value={getConfigurationContextValue(userJWT)}>
       <SafeAreaView>
-        <StatusBar />
-        <MainScreen />
+        <StatusBar barStyle={'light-content'} />
+        {userJWT ? onlineScreens : offlineScreens}
       </SafeAreaView>
     </ConfigContext.Provider>
   );
 };
 
-export default App;
+const AppWrapper = () => {
+  return (
+    <StoreProvider store={store}>
+      <App />
+    </StoreProvider>
+  );
+};
+
+export default AppWrapper;

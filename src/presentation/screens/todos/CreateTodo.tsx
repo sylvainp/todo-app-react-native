@@ -9,9 +9,7 @@ import {
 
 const styles = StyleSheet.create({
   root: {
-    backgroundColor: 'lightgray',
     margin: 4,
-    padding: 10,
     borderRadius: 5,
     justifyContent: 'center',
     alignItems: 'center',
@@ -26,12 +24,16 @@ const styles = StyleSheet.create({
     paddingHorizontal: 4,
     fontSize: 22,
     flex: 9,
+    borderColor: 'purple',
+    borderWidth: 2,
   },
 
   button_container: {
     flex: 2,
+    paddingHorizontal: 8,
+    borderRadius: 5,
     justifyContent: 'center',
-    backgroundColor: 'lightblue',
+    backgroundColor: 'purple',
     height: 55,
     marginLeft: 4,
   },
