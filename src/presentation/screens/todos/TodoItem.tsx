@@ -52,13 +52,9 @@ const TodoItem = (prop: TodoItemProp) => {
     onChecked(item.id, checked);
   }, [checked]);
   return (
-    <View
-      style={{...styles.row, borderColor: item.isDone ? 'gray' : 'lightblue'}}>
+    <View style={{...styles.row, borderColor: item.isDone ? 'purple' : 'pink'}}>
       <View style={styles.row_text_container}>
         <Text style={styles.row_title}>{item.title}</Text>
-        {item.description && (
-          <Text style={styles.row_description}>{item.description}</Text>
-        )}
       </View>
       <TouchableOpacity
         style={styles.row_check_container}
@@ -69,9 +65,9 @@ const TodoItem = (prop: TodoItemProp) => {
         <CheckBox
           style={styles.row_check}
           disabled={true}
-          onCheckColor="gray"
-          onTintColor="gray"
-          tintColor="lightblue"
+          onCheckColor="purple"
+          onTintColor="purple"
+          tintColor="pink"
           value={item.isDone}
         />
       </TouchableOpacity>

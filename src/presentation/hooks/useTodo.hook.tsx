@@ -1,7 +1,7 @@
 import {useEffect, useState} from 'react';
-import {useConfig} from '../../../core/context/ConfigurationContext';
-import UsecaseResponse from '../../../core/usecase/usecase.response';
-import TodoEntity from '../../../domain/entities/todo.entities';
+import {useConfig} from '../../core/context/ConfigurationContext';
+import UsecaseResponse from '../../core/usecase/usecase.response';
+import TodoEntity from '../../domain/entities/todo.entities';
 
 const useTodo = () => {
   const [isLoading, setLoading] = useState<boolean>(false);
@@ -32,7 +32,6 @@ const useTodo = () => {
     setLoading(true);
     const response: UsecaseResponse<TodoEntity> = await createTodoUsecase.call({
       title,
-      description,
     });
 
     if (response.data) {

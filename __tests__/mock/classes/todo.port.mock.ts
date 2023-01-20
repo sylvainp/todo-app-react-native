@@ -14,6 +14,6 @@ export default class TodoPortMock implements TodoPort {
     throw new Error('Method not implemented.');
   }
   addTodo(_request: CreateTodoRequest): Promise<Error | todoEntities> {
-    return Promise.resolve(new TodoEntity('1', 'title', 'description'));
+    return Promise.resolve(new TodoEntity('1', 'title'));
   }
 }

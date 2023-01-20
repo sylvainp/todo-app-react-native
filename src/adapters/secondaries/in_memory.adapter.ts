@@ -12,7 +12,6 @@ export default class InMemoryAdapter implements TodoPort {
     const entity = new TodoEntity(
       `${this._allTodo.length + 1}`,
       request.title,
-      request.description,
       false,
     );
     this._allTodo.push(entity);
@@ -29,7 +28,6 @@ export default class InMemoryAdapter implements TodoPort {
       this._allTodo[index] = new TodoEntity(
         entity.id,
         entity.title,
-        entity.description,
         request.done,
       );
       // await this.wait(2000);

@@ -3,7 +3,7 @@ import {ConfigurationContext} from './ConfigurationContext.type';
 import getConfigurationContext from './getConfigurationContextValue';
 
 export const ConfigContext = createContext<ConfigurationContext>(
-  getConfigurationContext(),
+  getConfigurationContext(null),
 );
 
 export const useConfig = () => useContext(ConfigContext);

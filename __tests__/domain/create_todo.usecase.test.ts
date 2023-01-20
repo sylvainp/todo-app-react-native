@@ -10,11 +10,10 @@ describe('CreateTodoUsecase', () => {
   let todoAdapter: TodoPort;
   const mockCreateTodoRequest: CreateTodoRequest = {
     title: 'title',
-    description: 'description',
   };
   beforeAll(() => {
-    const {inMemoryAdapter, createTodoUsecase} = useConfigMock();
-    todoAdapter = inMemoryAdapter;
+    const {todoPort, createTodoUsecase} = useConfigMock();
+    todoAdapter = todoPort;
     usecase = createTodoUsecase;
   });
 
@@ -33,11 +32,7 @@ describe('CreateTodoUsecase', () => {
 
   it('call function must return a usecaseResponse with todoEntity returned by port', async () => {
     expect.assertions(2);
-    const expectedTodoEntity = new TodoEntity(
-      '1',
-      mockCreateTodoRequest.title,
-      mockCreateTodoRequest.description,
-    );
+    const expectedTodoEntity = new TodoEntity('1', mockCreateTodoRequest.title);
     jest.spyOn(todoAdapter, 'addTodo').mockResolvedValue(expectedTodoEntity);
     const response: UsecaseResponse<TodoEntity> = await usecase.call(
       mockCreateTodoRequest,
